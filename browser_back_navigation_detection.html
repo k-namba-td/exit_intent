@@ -15,32 +15,85 @@
         font-size: 26px;
         text-align: center;
     }
-    
+    .popup{
+        position: fixed;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 400px;
+        background-color: #aaa;
+        color: #fff;
+        font-weight: bold;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 10px;
+        opacity: 0;
+        transition: opacity 0.4s ease-out;
+        visibility: hidden;
+    }
+    .popup.displayed{
+        visibility: visible;
+        opacity: 1;
+    }
+    .close-button{
+        position: absolute;
+        z-index: 3;
+        right: -10px;
+        top: -10px;
+        display: block;
+        width: 28px;
+        height: 28px;
+        border: 1px solid #aaa;
+        border-radius: 50%;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        background-color: #fff;
+    }
+    .close-button::before{
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 2px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        transform-origin: center center;
+        background-color: #888;
+    }
+    .close-button::after{
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 2px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(135deg);
+        transform-origin: center center;
+        background-color: #888;
+    }
   </style>
 </head>
 <body>
 <div class="wrapper" id="js-wrapper">
-  <h1 class="heading">Tracking verification page for exit intent</h1>
-  <div class="timer-container">
-    <form>
-        <div class="form-block">
-            <label for="num">Number of seconds for the timer:</label>
-            <input type="number" id="num" name="seconds" value="10">
-        </div>
-        <div class="form-block">
-            <label for="check-cursor">Timer Cancellation Based on User Behavior (Active in 5s):</label>
-            <input type="checkbox" id="check-cursor" name="check-cursor">
-        </div>
-    </form>
-    <button id="set-timer-button">Start TImer</button>
-  </div>
-  <div class="log-container" id="js-log-container">
-  </div>
+  <h1 class="heading">Verification of browser back navigation detection</h1>
+  <div class="popup" id="js-popup">popup<button class="close-button" id="js-close-button"></button></div>
 </div>
-<div class="focus-info" id="js-focus-info"></div>
 </body>
 <script>
-const wrapper = document.getElementById("js-wrapper");
-
+const popup = document.getElementById("js-popup");
+const closeButton = document.getElementById("js-close-button");
+let hasPopup = false;
+window.history.pushState(null, '', window.location.href);
+window.addEventListener('popstate', (e) => {
+    popup.classList.add("displayed");
+});
+closeButton.addEventListener("click", (e) => {
+    popup.classList.remove("displayed");
+});
 </script>
 </html>
