@@ -96,15 +96,15 @@
   <div class="timer-container">
     <form>
         <div class="form-block">
-            <label for="num">セットするタイマーの秒数:</label>
+            <label for="num">Number of seconds for the timer:</label>
             <input type="number" id="num" name="seconds" value="10">
         </div>
         <div class="form-block">
-            <label for="check-cursor">マウス動作でタイマー中止（5秒後適用）:</label>
+            <label for="check-cursor">Timer Cancellation Based on User Behavior (Active in 5s):</label>
             <input type="checkbox" id="check-cursor" name="check-cursor">
         </div>
     </form>
-    <button id="set-timer-button">タイマー計測開始</button>
+    <button id="set-timer-button">Start TImer</button>
   </div>
   <div class="log-container" id="js-log-container">
   </div>
@@ -143,17 +143,28 @@ setTimerButon.addEventListener("click", (e) => {
     timer = setTimeout(() => {
         writeLog("Timer ends.");
         document.removeEventListener("mousemove", stopTimer);
+        document.removeEventListener("scroll", stopTimer);
+        document.removeEventListener("mousedown", stopTimer);
+        document.removeEventListener("touchstart", stopTimer);
     }, sec);
     writeLog("Start timer.");
     if(option){
         timerForOption = setTimeout(() => {
             document.addEventListener("mousemove", stopTimer);
+            document.addEventListener("scroll", stopTimer);
+            document.addEventListener("mousedown", stopTimer);
+            document.addEventListener("touchstart", stopTimer);
         }, 5*1000);
     }
     function stopTimer(e){
+        console.log("stopTimer", e)
         if(timer) clearTimeout(timer);
-        writeLog(`Timer ends when "mousemove" is detected.`);
+        writeLog(`Timer ends when "${e.type}" is detected.`);
         document.removeEventListener("mousemove", stopTimer);
+        document.removeEventListener("scroll", stopTimer);
+        document.removeEventListener("mousedown", stopTimer);
+        document.removeEventListener("touchstart", stopTimer);
+        
     }
 });
 document.addEventListener("visibilitychange", (e) => {
