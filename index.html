@@ -10,6 +10,7 @@
     }
     .wrapper{
         padding: 0 30px 30px;
+        text-align: center;
     }
     .heading{
         font-size: 26px;
@@ -56,7 +57,7 @@
         margin: 0 0 0 10px;
     }
     .log-container{
-
+        text-align: left;
     }
     .log-container > .log{
         box-sizing: border-box;
@@ -88,6 +89,17 @@
         font-size: 14px;
         color: #fff;
     }
+    #js-verification-browser-back{
+        display: inline-block;
+        border: none;
+        padding: 12px 40px;
+        background-color: #666;
+        color: #fff;
+        border-radius: 2px;
+        cursor: pointer;
+        margin: 20px auto 30px;
+        text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -106,6 +118,7 @@
     </form>
     <button id="set-timer-button">Start TImer</button>
   </div>
+  <!-- <a id="js-verification-browser-back" href="./browser_back_navigation_detection.html">Verification of browser back navigation detection</a> -->
   <div class="log-container" id="js-log-container">
   </div>
 </div>
@@ -170,7 +183,7 @@ setTimerButon.addEventListener("click", (e) => {
 document.addEventListener("visibilitychange", (e) => {
     console.log(e)
     if(document.visibilityState === "hidden"){
-        writeLog(`Detects the "visibilitychange" event and determines that "visibilityState" has become hidden`);
+        writeLog(`Detects "visibilitychange" event and determines "visibilityState" has become hidden`);
     }
 });
 document.addEventListener("mouseleave", (e) => {
@@ -178,11 +191,11 @@ document.addEventListener("mouseleave", (e) => {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const isOutside = e.clientX <= 0 || e.clientX >= width || e.clientY <= 0 || e.clientY >= height;
-    if(isOutside) writeLog(`Detects the "mouseleave" event and determines that the mouse cursor has moved off-screen.`);
+    if(isOutside) writeLog(`Detects "mouseleave" event and determines that the mouse cursor has moved off-screen.`);
 });
 window.addEventListener('focus', (e) => {
   console.log(e);
-  writeLog(`Detected a "focus" event and determined that focus had returned to the window.`);
+  writeLog(`Detects "focus" event and determines that focus has returned to the window.`);
   focusInfo.classList.remove("blur");
 });
 window.addEventListener('blur', (e) => {
