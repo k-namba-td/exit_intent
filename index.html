@@ -89,7 +89,8 @@
         font-size: 14px;
         color: #fff;
     }
-    #js-verification-browser-back{
+    #js-verification-browser-back1,
+    #js-verification-browser-back2{
         display: inline-block;
         border: none;
         padding: 12px 40px;
@@ -97,8 +98,11 @@
         color: #fff;
         border-radius: 2px;
         cursor: pointer;
-        margin: 20px auto 30px;
+        margin: 20px auto 0;
         text-decoration: none;
+    }
+    #js-verification-browser-back2{
+        margin: 20px auto 30px;
     }
   </style>
 </head>
@@ -116,9 +120,10 @@
             <input type="checkbox" id="check-cursor" name="check-cursor">
         </div>
     </form>
-    <button id="set-timer-button">Start TImer</button>
+    <button id="set-timer-button">Start Timer</button>
   </div>
-  <!-- <a id="js-verification-browser-back" href="./browser_back_navigation_detection.html">Verification of browser back navigation detection</a> -->
+  <!-- <a id="js-verification-browser-back1" href="./browser_back_navigation_detection.html">Verification of browser back navigation detection<br>(A: Without Popup)</a><br>
+  <a id="js-verification-browser-back2" href="./browser_back_navigation_detection.html?popup_test=true">Verification of browser back navigation detection<br>(B: With Popup)</a> -->
   <div class="log-container" id="js-log-container">
   </div>
 </div>

@@ -15,6 +15,10 @@
         font-size: 26px;
         text-align: center;
     }
+    .introduction{
+        font-size: 16px;
+        text-align: center;
+    }
     .popup{
         position: fixed;
         z-index: 1;
@@ -81,19 +85,23 @@
 <body>
 <div class="wrapper" id="js-wrapper">
   <h1 class="heading">Verification of browser back navigation detection</h1>
+  <p class="introduction">The popup opens on browser back navigation if the URL includes the query parameter "popup_test=true".</p>
   <div class="popup" id="js-popup">popup<button class="close-button" id="js-close-button"></button></div>
 </div>
 </body>
 <script>
 const popup = document.getElementById("js-popup");
 const closeButton = document.getElementById("js-close-button");
-let hasPopup = false;
-window.history.pushState(null, '', window.location.href);
-window.addEventListener('popstate', (e) => {
-    popup.classList.add("displayed");
-});
-closeButton.addEventListener("click", (e) => {
-    popup.classList.remove("displayed");
-});
+const isPopup = /[?&]popup_test=true(?:[#&]|$)/.test(location.search);
+const setPopup = () => {
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', (e) => {
+        popup.classList.add("displayed");
+    });
+    closeButton.addEventListener("click", (e) => {
+        popup.classList.remove("displayed");
+    });
+}
+if(isPopup) setPopup();
 </script>
 </html>
